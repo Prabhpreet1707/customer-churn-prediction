@@ -115,6 +115,34 @@ This allows the model to identify more potential churn customers, reducing the c
 
 ---
 
+## Results
+
+The model was evaluated on a held-out test set using the default 0.5 classification threshold, then re-evaluated after adjusting the threshold based on business priorities.
+
+Metric	Default Threshold (0.5)	Adjusted Threshold (0.3)
+Accuracy	0.81	—
+Precision	0.68	0.53
+Recall	0.53	0.75
+F1 Score	0.59	—
+
+Confusion Matrix (default threshold):
+
+[[940  95]
+ [176 198]]
+
+At the default threshold, the model missed 176 actual churners (false negatives) while correctly catching 198. Since a missed churner represents lost revenue with no chance to intervene, while a false positive only costs a low-value retention offer, recall was prioritized over raw accuracy when choosing the final threshold.
+
+Lowering the threshold to 0.3 raised recall from 0.53 to 0.75 — catching 84 more actual churners — at the cost of precision dropping from 0.68 to 0.53 (more false alarms). The full tradeoff across every possible threshold is shown below:
+
+
+The 0.3 threshold was chosen as a reasonable balance given the asymmetric cost of the two error types. With real business figures for the cost of a missed churner versus a wasted retention offer, this threshold could be optimized further rather than chosen by inspection.
+
+## Limitations
+
+The dataset used for this project has a limited number of features; richer behavioral or usage data (e.g. support ticket history, product engagement) would likely improve recall further.
+Class imbalance in the target variable was addressed via threshold adjustment and the recall scoring metric during tuning, but resampling techniques (e.g. SMOTE) were not tested and could be a useful next step.
+The 0.3 threshold was selected by inspection of the precision-recall curve rather than from an explicit cost-benefit calculation, since exact business costs for a missed churner vs. a false alarm were not available.
+
 ## Model Deployment Preparation
 
 The trained pipeline was saved using:joblib
