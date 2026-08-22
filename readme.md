@@ -119,11 +119,12 @@ This allows the model to identify more potential churn customers, reducing the c
 
 The model was evaluated on a held-out test set using the default 0.5 classification threshold, then re-evaluated after adjusting the threshold based on business priorities.
 
-Metric	Default Threshold (0.5)	Adjusted Threshold (0.3)
-Accuracy	0.81	—
-Precision	0.68	0.53
-Recall	0.53	0.75
-F1 Score	0.59	—
+| Metric | Default Threshold (0.5) | Adjusted Threshold (0.3) |
+|-----------|:---:|:---:|
+| Accuracy  | 0.81 | — |
+| Precision | 0.68 | 0.53 |
+| Recall    | 0.53 | 0.75 |
+| F1 Score  | 0.59 | — |
 
 Confusion Matrix (default threshold):
 
@@ -134,6 +135,7 @@ At the default threshold, the model missed 176 actual churners (false negatives)
 
 Lowering the threshold to 0.3 raised recall from 0.53 to 0.75 — catching 84 more actual churners — at the cost of precision dropping from 0.68 to 0.53 (more false alarms). The full tradeoff across every possible threshold is shown below:
 
+![Precision-Recall Tradeoff](images/pr_curve.png)
 
 The 0.3 threshold was chosen as a reasonable balance given the asymmetric cost of the two error types. With real business figures for the cost of a missed churner versus a wasted retention offer, this threshold could be optimized further rather than chosen by inspection.
 
