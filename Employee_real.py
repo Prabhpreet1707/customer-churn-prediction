@@ -95,6 +95,26 @@ print(f1_score(y_test, predictions))
 
 probabilities = grid.predict_proba(X_test)[:, 1]  # probability of "will churn" for each customer
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve
+
+precisions, recalls, thresholds = precision_recall_curve(y_test, probabilities)
+
+plt.figure(figsize=(8, 6))
+plt.plot(thresholds, precisions[:-1], label="Precision", linewidth=2)
+plt.plot(thresholds, recalls[:-1], label="Recall", linewidth=2)
+plt.axvline(x=0.5, color='gray', linestyle='--', alpha=0.6, label="Default threshold (0.5)")
+plt.axvline(x=0.3, color='red', linestyle='--', alpha=0.6, label="Your tested threshold (0.3)")
+plt.xlabel("Classification Threshold")
+plt.ylabel("Score")
+plt.title("Precision vs Recall Across All Thresholds")
+plt.legend()
+plt.tight_layout()
+plt.savefig("images/pr_curve.png", dpi=120)
+print("Saved images/pr_curve.png")
+
 custom_threshold = 0.3  # lower than default 0.5 — catches more churners, at the cost of more false positives
 custom_predictions = (probabilities >= custom_threshold).astype(int)
 
