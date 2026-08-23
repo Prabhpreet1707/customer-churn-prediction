@@ -7,6 +7,10 @@ Customer churn is one of the biggest challenges faced by subscription-based busi
 The goal of this project is to build a machine learning classification model that predicts whether a customer is likely to churn based on their demographic details, service usage, contract information, and billing history.
 
 ---
+## Live Demo
+Try the deployed model here: [https://customer-churn-prediction-ny3u.onrender.com/docs](https://customer-churn-prediction-ny3u.onrender.com/docs)
+
+Note: the free hosting tier spins down after inactivity, so the first request may take 30-60 seconds to respond while the service wakes up.
 
 ## Project Workflow
 

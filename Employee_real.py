@@ -26,8 +26,8 @@ from sklearn.metrics import(
 df = df.drop("customerID", axis=1)
 
 X = df.drop("Churn", axis=1)
+print(list(X.columns))
 y = df["Churn"]
-
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
